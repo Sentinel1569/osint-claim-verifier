@@ -1,0 +1,18 @@
+.status { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: .05em; padding: 2px 8px; border-radius: 6px; color: #fff; }
+.s-verified { background: var(--ok); } .s-refuted { background: var(--bad); } .s-contested { background: var(--warn); }
+.s-allegation { background: var(--hyp); } .s-unverified { background: var(--muted); }
+.claim { border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+.claim h3 { margin: 6px 0; font-size: 14.5px; }
+.matrix th.src { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; font-weight: 600; padding: 6px 2px; vertical-align: bottom; max-height: 160px; }
+.matrix td.cell { text-align: center; cursor: pointer; font-size: 16px; min-width: 38px; border-left: 1px solid var(--border); }
+.matrix td.cell:hover { background: var(--panel-2); }
+.st-supports { color: var(--ok); } .st-refutes { color: var(--bad); } .st-attributes { color: var(--hyp); } .st-mentions { color: var(--muted); }
+.grpbar { height: 4px; border-radius: 2px; margin-top: 4px; }
+.tl { position: relative; padding-left: 18px; border-left: 2px solid var(--border); margin-left: 6px; }
+.tl .it { position: relative; padding: 4px 0 10px; }
+.tl .it::before { content: ""; position: absolute; left: -25px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--k, var(--muted)); border: 2px solid var(--panel); }
+.tl .d { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.flag { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.src { border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+.src .row > * { flex: 0 0 auto; }
+.diff-added { color: var(--ok); } .diff-removed { color: var(--bad); text-decoration: line-through; }

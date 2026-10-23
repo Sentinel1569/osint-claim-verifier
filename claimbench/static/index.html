@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claim Verification Workbench</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232b6cb0%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/base.css">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="logo" style="background:#2b6cb0">CV</div>
+  <div><h1>Claim Verification Workbench</h1><div class="sub">Separate verified facts from allegations, with sources, timing and contradictions in view</div></div>
+  <div class="spacer"></div>
+  <button id="theme" class="ghost sm">◐ Theme</button>
+</header>
+<main>
+  <div class="grid cols-side">
+    <aside class="grid" style="align-content:start">
+      <section class="card">
+        <h2>Case</h2>
+        <select id="caseSel"></select>
+        <div class="row" style="margin-top:8px"><input id="newCase" type="text" placeholder="New case title"><button id="addCase" class="ghost sm shrink">Create</button></div>
+        <div class="row" style="margin-top:8px"><button id="demo" class="ghost">Load demo case</button><a class="btn ghost sm shrink" id="mdLink" href="#">Report .md</a></div>
+      </section>
+      <section class="card" id="addSrcCard">
+        <h2>Add source</h2>
+        <div class="tabs" id="srcTabs"><button data-t="url" class="active">URL</button><button data-t="image">Image</button><button data-t="manual">Manual</button></div>
+        <div data-p="url">
+          <input id="sUrl" type="url" placeholder="https://…">
+          <label class="small"><input type="checkbox" id="sArchive" checked> Check Wayback Machine captures &amp; edits</label>
+        </div>
+        <div data-p="image" hidden>
+          <input id="sImg" type="file" accept="image/*">
+          <input id="sImgUrl" type="url" placeholder="Where it was posted (URL)" style="margin-top:6px">
+          <input id="sImgCaption" type="text" placeholder="Caption / context" style="margin-top:6px">
+          <input id="sImgDate" type="text" placeholder="Posted at (YYYY-MM-DD)" style="margin-top:6px">
+        </div>
+        <div data-p="manual" hidden>
+          <input id="mTitle" type="text" placeholder="Title (e.g. 'Phone call with spokesperson')">
+          <input id="mPub" type="text" placeholder="Publisher / speaker" style="margin-top:6px">
+          <input id="mDate" type="text" placeholder="Published (YYYY-MM-DD)" style="margin-top:6px">
+          <textarea id="mText" placeholder="Text / notes" style="margin-top:6px;min-height:60px;font-family:inherit"></textarea>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <select id="sKind"><option>news</option><option>official</option><option>factcheck</option><option>social</option><option>document</option><option>archive</option><option>other</option></select>
+          <select id="sRel" title="Source reliability"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option selected>F</option></select>
+          <select id="sCred" title="Information credibility"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option></select>
+        </div>
+        <button id="addSrc" style="margin-top:8px;width:100%">Add source</button>
+        <div class="hint">Grades use the Admiralty scale: reliability of the source (A–F) and credibility of the information (1–6).</div>
+      </section>
+      <section class="card">
+        <h2>Add claim</h2>
+        <textarea id="cText" placeholder="State the claim as a checkable sentence" style="min-height:60px;font-family:inherit"></textarea>
+        <label for="cDate">Date of the claimed event</label><input id="cDate" type="date">
+        <button id="addClaim" class="ghost" style="margin-top:8px;width:100%">Add claim</button>
+      </section>
+      <section class="card" id="linkCard" hidden>
+        <h2>Link source to claim</h2>
+        <div id="linkWhat" class="small"></div>
+        <label>Stance</label>
+        <select id="lStance"><option value="supports">supports</option><option value="refutes">refutes</option><option value="attributes">attributes (reports someone else saying it)</option><option value="mentions">mentions</option><option value="none">— remove link —</option></select>
+        <label>Quote</label><textarea id="lQuote" style="min-height:50px;font-family:inherit"></textarea>
+        <label>Asserted value (number, date…)</label><input id="lValue" type="text" placeholder="e.g. 5, or 2026-03-12">
+        <div class="row" style="margin-top:8px"><button id="lSave">Save</button><button id="lCancel" class="ghost">Cancel</button></div>
+      </section>
+    </aside>
+
+    <div class="grid" style="align-content:start">
+      <div id="msg"></div>
+      <div class="grid cols-4" id="stats"></div>
+      <section class="card"><h2>Claims</h2><div id="claims" class="grid cols-2"></div></section>
+      <section class="card">
+        <h2>Evidence matrix</h2>
+        <div class="small muted" style="margin-bottom:8px">Click a cell to link a source to a claim. Sources sharing a colour bar are <b>not independent</b> (same page, publisher or syndicated text).</div>
+        <div id="matrix" style="overflow:auto"></div>
+      </section>
+      <div class="grid cols-2">
+        <section class="card"><h2>Contradictions &amp; red flags</h2><div id="contra" class="scroll"></div></section>
+        <section class="card"><h2>Evidence timeline</h2><div id="timeline" class="scroll"></div></section>
+      </div>
+      <section class="card"><h2>Sources</h2><div id="sources" class="scroll" style="max-height:640px"></div></section>
+    </div>
+  </div>
+</main>
+<script src="/static/base.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
